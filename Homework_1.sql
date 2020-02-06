@@ -23,6 +23,36 @@ CREATE TABLE BASEMENT_RATS
  NameRat VARCHAR (100),
  Tavern_id INT);
  
- CREATE TABLE LOCATION 
-(Location_id INT IDENTITY (1,1),
- NameL VARCHAR (100));
+CREATE TABLE SUPPLIES
+(Supply_id INT IDENTITY (1,1),
+ NameSupply VARCHAR (100),
+ Unit VARCHAR(100));
+              
+CREATE TABLE INVENTORY 
+(Tavern_id INT ,
+ Supply_id INT,
+ Counts INT,
+ Date_updated DATE);              
+ 
+CREATE TABLE INVOICE 
+(Receipt_Number INT IDENTITY (1,1),
+ Tavern_id INT ,
+ Supply_id INT,
+ Amount_Received INT,
+ Date_updated DATE);
+              
+              
+CREATE TABLE SERVICES 
+(Service_id INT IDENTITY(1,1),
+ NameService VARCHAR(250)); 
+                    
+CREATE TABLE STATUS 
+(Service_id INT ,
+ Tavern_id INT,
+ Service_Status VARCHAR(250));           
+  
+CREATE TABLE SALES 
+(Service_id INT,
+ Guest_Name VARCHAR(250),
+ Price FLOAT,
+ Date_Purchased DATE);                         
