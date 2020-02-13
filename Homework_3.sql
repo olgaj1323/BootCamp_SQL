@@ -58,8 +58,10 @@ SELECT TOP 10 Rate, Room_id FROM  ROOMS;
 --7. Write a query to return all the values stored in all Lookup Tables - Lookup tables are the tables we reference typically with just an ID and a name. This should be a dynamic combining of all of the tables
 SELECT *
 FROM INFORMATION_SCHEMA.COLUMNS
+WHERE ORDINAL_POSITION <3;
 
 --8. Write a query that returns Guest Classes with Levels and Generate a new column with a label for their level grouping (lvl 1-10, 10-20, etc)
+
 
 
 --9.Write a series of INSERT commands that will insert the statuses of one table into another of your choosing using SELECT statements
