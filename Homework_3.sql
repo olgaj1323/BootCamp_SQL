@@ -62,12 +62,14 @@ WHERE ORDINAL_POSITION <3;
 
 --8. Write a query that returns Guest Classes with Levels and Generate a new column with a label for their level grouping (lvl 1-10, 10-20, etc)
 
-SELECT Class_id, Class_Name, Levels, (CASE  
-  WHEN Levels BETWEEN 1 AND 10 THEN Group = '1-10'
-  WHEN Levels BETWEEN 11 AND 20 THEN Group = '11-20'
-  WHEN Levels >21  THEN Group = '21+') AS Group
+SELECT c.Class_id, Class_Name, Levels, 
+CASE  
+  WHEN Levels BETWEEN 1 AND 10 THEN '1-10'
+  WHEN Levels BETWEEN 11 AND 20 THEN '11-20'
+  ELSE  '21+'
+ END AS Groups
  FROM LEVELS AS l
- JOIN CLASSES AS c ON l.Class_id = c. Class_id;
+ JOIN CLASSES AS c ON l.Class_id = c.Class_id;
  
 --9.Write a series of INSERT commands that will insert the statuses of one table into another of your choosing using SELECT statements
 SELECT CONCAT('INSERT INTO', Table_Name, '(', column_Name,')') AS queryPiece
