@@ -18,9 +18,9 @@ ORDER BY Class_Name;
 
 SELECT Guest_id,Name_Guest, class_Name, Levels,(
 CASE
-WHEN Levels BETWEEN 1 AND 5 THE 'Beginner'
-WHEN Levels BETWEEN 1 AND 5 THE 'Intermediate'
-WHEN Levels BETWEEN 1 AND 5 THE 'Expert') AS Level-Description
+WHEN Levels BETWEEN 1 AND 5 THEN 'Beginner'
+WHEN Levels BETWEEN 1 AND 5 THEN 'Intermediate'
+WHEN Levels BETWEEN 1 AND 5 THEN 'Expert') AS Level-Description
 FROM LEVELS L JOIN CLASSES C
 ON C.Class_id=L.Class_id
 JOIN GUESTS G
@@ -28,14 +28,22 @@ ON G.Guest_id=L.Guest_id
 ORDER BY Name_Guest ASC;
 
 --4.	Write a function that takes a level and returns a “grouping” from question 3 (e.g. 1-5, 5-10, 10+, etc)
+IF OBJECT_ID (dbo.get_Group’, N'FN') IS NOT NULL  
+    DROP FUNCTION get_Group;  
+GO  
+CREATE FUNCTION dbo.get_Group(@level int)  
+RETURNS varchar(100)
+AS   
+BEGIN 
+   RETURN
+    CASE
+    WHEN @level BETWEEN 1 AND 5 THEN 'Beginner'
+    WHEN @level BETWEEN 6 AND 10 THEN 'Intermediater'
+    WHEN @level >10 THEN 'Expert'
+  END
+END
 
-
-
-
-
-
-
-5.	Write a function that returns a report of all open rooms (not used) on a particular day (input) and which tavern they belong to 
+--5.Write a function that returns a report of all open rooms (not used) on a particular day (input) and which tavern they belong to 
 
 
 
