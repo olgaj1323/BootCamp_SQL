@@ -1,7 +1,18 @@
 --1.Write a query to return a “report” of all users and their roles
-SELECT user_id, NameU, NameR
+
+IF OBJECT_ID (N'User_Roles', N'FN') IS NOT NULL  
+    DROP FUNCTION dbo.User_Roles; 
+GO
+CREATE FUNCTION dbo.User_Roles ()
+RETURNS TABLE
+AS
+return(SELECT user_id, NameU, NameR
 FROM USERS JOIN ROLES
 ON USERS.Role_id = ROLES.Role_id
+);
+GO
+
+SELECT * FROM User_Roles();
 
 --2.Write a query to return all classes and the count of guests that hold those classes
 
