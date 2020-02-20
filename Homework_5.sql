@@ -102,17 +102,15 @@ SELECT * FROM Price_Range(50,140)
 --7.	Write a command that uses the result from 6 to Create a Room in another tavern that undercuts (is less than) 
 --the cheapest room by a penny - thereby making the new room the cheapest one
 
-GO
-CREATE PROCEDURE Guests.getGuest
-@LastName nvarchar(50),
-@FirstName nvarchar(50)
+CREATE PROCEDURE New_Room(@Tavern_id int)
 AS
-/* This can also be an update/create/delete etc */
-SET NOCOUNT ON; 
-SELECT FirstName, LastName, Department
-FROM 
-HumanResources.vEmployeeDepartmentHistory
-WHERE FirstName = @FirstName 
-AND LastName = @LastName
-AND EndDate IS NULL;
+BEGIN
+	SET NOCOUNT ON;
+INSERT INTO ROOMS(Rate,@Tavern_id)
+VALUES 
+   ((SELECT MIN(Rate) 
+    FROM Price_Range(50,140))-0.01, @Tavern_id)
+END
 GO
+
+EXECT New_Room(8)
